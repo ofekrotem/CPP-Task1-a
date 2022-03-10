@@ -40,7 +40,13 @@ TEST_CASE("Good input") {
                                                      "@---------@\n"
                                                      "@@@@@@@@@@@"));
 
-	CHECK(nospaces(mat(3, 7, 'O', '!')) == nospaces("OOO\n"
+	CHECK(nospaces(mat(11, 5, '@', '-')) == nospaces("@@@@@@@@@@@\n"
+                                                     "@---------@\n"
+                                                     "@-@@@@@@@-@\n"
+                                                     "@---------@\n"
+                                                     "@@@@@@@@@@@"));
+
+	CHECK(nospaces(mat(3, 7, 'O', 'R')) == nospaces("OOO\n"
                                                     "ORO\n"
                                                     "ORO\n"
                                                     "ORO\n"
@@ -54,12 +60,7 @@ TEST_CASE("Even rows or column input") {
     CHECK_THROWS(mat(8, 5, '$', '%'));
 	CHECK_THROWS(mat(9, 4, '$', '%'));
 	CHECK_THROWS(mat(8, 4, '$', '%'));
-}
-
-TEST_CASE("Same symbols input") {
-	CHECK_THROWS(mat(7, 5, '$', '$'));
-	CHECK_THROWS(mat(7, 5, 'A', 'A'));
-	CHECK_THROWS(mat(7, 5, 'b', 'b'));
+	CHECK_THROWS(mat(8, 7, 'A', 'a'));
 }
 
 TEST_CASE("Negetive or zero rows or column input") {
@@ -69,6 +70,7 @@ TEST_CASE("Negetive or zero rows or column input") {
 	CHECK_THROWS(mat(7, 0, '!', '$'));
 	CHECK_THROWS(mat(0, 7, '!', '$'));
 	CHECK_THROWS(mat(0, 0, '!', '$'));
+	CHECK_THROWS(mat(0, -4, '$', '%'));
 }
 
 TEST_CASE("Very bad input") {
@@ -80,6 +82,7 @@ TEST_CASE("Very bad input") {
 
 TEST_CASE("Small input") {
 	CHECK(nospaces(mat(1,1,'$','!')) == nospaces("$"));
+	CHECK(nospaces(mat(1,1,'A','b')) == nospaces("A"));
 }
 
 TEST_CASE("Big input") {
